@@ -5,17 +5,14 @@ on: [push]
 jobs:
   build:
       strategy:
-        fail-fast: false
-        max-parallel: 2
         matrix:
           os: [ubuntu-latest, ubuntu-20.04, windows-latest]
-          
           py-version: [3.7, 3.8, 3.9]
-      
-      steps:
-          - runs-on: ${{ matrix.os }}
-          - name: Set up Python
-          - uses: actions/setup-python@v4
-      with:
-        python-version: ${{ py-version }}
+      runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ py-version }}
         
